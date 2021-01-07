@@ -1,22 +1,19 @@
-window.mockApiUrl =
-"https://5ff1a6a4db1158001748b2bd.mockapi.io/pets/";
+window.mockApiUrl = "https://5ff1a6a4db1158001748b2bd.mockapi.io/pets/";
 
 window.removePet = (id) => {
-    fetch(`${window.mockApiUrl}${id}`, {
-        method: "DELETE",
-        headers: {
-            'Accept': 'application/json, text/plain, */*',
-            'Content-Type': 'application/json'
-        }
-    })
-    .then(()=> {
-        window.location.reload();
-    })
+  fetch(`${window.mockApiUrl}${id}`, {
+    method: "DELETE",
+    headers: {
+      Accept: "application/json, text/plain, */*",
+      "Content-Type": "application/json",
+    },
+  }).then(() => {
+    window.location.reload();
+  });
 };
 
 window.generateDetailModal = (pet) => {
-
-    return ` <div class="modal fade" id="exampleModal${pet.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  const petModalHTMl = ` <div class="modal fade" id="exampleModal${pet.id}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
@@ -30,19 +27,15 @@ window.generateDetailModal = (pet) => {
         </div>
       </div>
     </div>
-  </div>`
-
-}
+  </div>`;
+  document.querySelector("body").innerHTML += petModalHTMl;
+};
 
 window.openPetDetail = (id) => {
-    fetch(`${window.mockApiUrl}${id}`)
-    .then(response => response.json())
+  fetch(`${window.mockApiUrl}${id}`)
+    .then((response) => response.json())
     .then((data) => {
-      const petModalHTMl =  generateDetailModal(data);
-      document.querySelector("body").innerHTML += petModalHTMl;
-      $(`#exampleModal${id}`).modal('show');
-    })
-
-
-
+      generateDetailModal(data);
+      $(`#exampleModal${id}`).modal("show");
+    });
 };
