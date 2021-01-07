@@ -23,7 +23,8 @@ window.generateDetailModal = (pet) => {
           </button>
         </div>
         <div class="modal-body">
-          ${pet.name}
+          ${pet.name},
+          ${pet.description}
         </div>
       </div>
     </div>
